@@ -16,4 +16,4 @@ fi
 # Remove any spaces in JOB_NAME
 JOB_NAME="$(echo "$JOB_NAME" | sed 's/ /%20/g')"
 
-curl --insecure -q "$JENKINS_URL/job/$JOB_NAME/$EXECUTION_ID/consoleText" | less
+curl -kq "$JENKINS_URL/job/$JOB_NAME/$EXECUTION_ID/consoleText" | less
