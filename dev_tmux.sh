@@ -20,6 +20,11 @@ else
     selected=$(echo "$items" | fzf-tmux)
 fi
 
+# Check for early exit from fzf (if repo is blank)
+if [[ -z "$selected" ]]; then
+    exit 0
+fi
+
 # Get the name of the repo to name the tmux window
 dirname=$(basename "$selected")
 
