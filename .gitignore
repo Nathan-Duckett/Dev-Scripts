@@ -1,0 +1,2 @@
+# Ignore env file - only allow force push to ensure the change is required (skips work PC)
+.env
