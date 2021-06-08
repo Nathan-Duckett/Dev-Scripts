@@ -14,6 +14,7 @@ else
     items=""
     for name in ${git_folders[@]}; do
         items+=$(find "$name" -maxdepth 1 -mindepth 1 -type d)
+        # Add new line to ensure each repo is separate
         items+="\n"
     done
     selected=$(echo "$items" | fzf-tmux)
