@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-git_folders=(
-    "~/Documents/gitea"
-    "~/Documents/github_repos"
-)
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+if [[ -f "$SCRIPT_DIR/.env" ]]; then
+    source "$SCRIPT_DIR/".env
+fi
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
