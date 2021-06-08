@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+# Load ENV configuration into script during execution
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 if [[ -f "$SCRIPT_DIR/.env" ]]; then
     source "$SCRIPT_DIR/".env
 fi
 
+# Chcek for arguments if provided for a folder directory
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
@@ -13,14 +15,17 @@ else
     for name in ${git_folders[@]}; do
         items+=$(find "$name" -maxdepth 1 -mindepth 1 -type d)
     done
-    selected=`echo "$items" | fzf-tmux`
+    selected=$(echo "$items" | fzf-tmux)
 fi
 
-dirname=`basename $selected`
+# Get the name of the repo to name the tmux window
+dirname=$(basename "$selected")
 
+# Switch to the tmux session if it exists
 tmux switch-client -t $dirname
 if [[ $? -eq 0 ]]; then
     exit 0
 fi
 
-tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+# Create new session if it doesn't exist
+tmux new-session -c "$selected" -d -s "$dirname" && tmux switch-client -t "$dirname" || tmux new -c "$selected" -A -s "$dirname"
