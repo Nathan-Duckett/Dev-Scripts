@@ -6,7 +6,8 @@ wget https://github.com/tmux/tmux/releases/download/$TMUX_VERSION/tmux-$TMUX_VER
 
 tar -xvf tmux-$TMUX_VERSION.tar.gz
 
-cd tmux-$TMUX_VERSION/
+# Exit with code 100 if directory doesn't exist
+cd tmux-$TMUX_VERSION/ || exit 100
 
 ./configure && make
 
