@@ -1,0 +1,2 @@
+alias fif="$DEV_SCRIPTS_HOME/helper/find_in_files.sh"
+alias dt="$DEV_SCRIPTS_HOME/helper/dev_tmux.sh"
