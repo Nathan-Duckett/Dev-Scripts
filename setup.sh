@@ -16,7 +16,13 @@ fi
 FOLDER_PATH_COMMAND="export DEV_SCRIPTS_HOME=\"$dev_scripts_location\""
 
 # Target profile file e.g. bashrc or bash_profile
-TARGET_PROFILE="$HOME/.config/fish/config.fish"
+if [[ "$SHELL" == "fish" ]]; then
+  TARGET_PROFILE="$HOME/.config/fish/config.fish"
+elif [[ "$SHELL" == "/usr/bin/zsh" ]]; then
+  TARGET_PROFILE="$HOME/.zshrc"
+else
+  TARGET_PROFILE="$HOME/.bashrc"
+fi
 
 # Check if content exists for Dev-Scripts path and set in bashrc
 if ! grep "$FOLDER_PATH_COMMAND" "$TARGET_PROFILE"; then
